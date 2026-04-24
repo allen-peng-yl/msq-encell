@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ENCell – Conference Meeting Booklet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
     --primary: #0a4f6e;
@@ -19,7 +21,7 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Segoe UI', system-ui, sans-serif;
     background: #f2f6fa;
     color: var(--text);
   }
@@ -28,29 +30,17 @@
   header {
     background: #111111;
     color: white;
-    padding: 16px 28px;
+    padding: 18px 28px;
     display: flex;
     align-items: center;
     gap: 16px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.18);
-    position: sticky;
-    top: 0;
-    z-index: 100;
   }
 
   .header-left { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; }
 
-  .logo-mark {
-    width: 42px; height: 42px;
-    background: white;
-    border-radius: 9px;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 900; font-size: 16px; color: var(--primary);
-    letter-spacing: -1px; flex-shrink: 0;
-  }
-
-  header h1 { font-size: 1.2rem; font-weight: 700; line-height: 1.2; }
-  header p  { font-size: 0.78rem; opacity: 0.75; margin-top: 2px; }
+  header h1 { font-size: 1.25rem; font-weight: 800; line-height: 1.2; letter-spacing: -0.02em; }
+  header p  { font-size: 0.78rem; opacity: 0.6; margin-top: 3px; font-weight: 400; }
 
   /* ── HEADER LOGOS (right side) ── */
   .header-logos {
@@ -406,7 +396,6 @@
 
 <header>
   <div class="header-left">
-    <div class="logo-mark">EN</div>
     <div>
       <h1>ENCell – Conference Meeting Booklet</h1>
       <p>EN001 Partnership Exploration · BIOCOM 2025</p>
@@ -434,30 +423,37 @@
     <!-- Confirmed Meetings -->
     <div class="card">
       <div class="card-head">Confirmed Meetings</div>
+
       <div class="group-lbl">BIOCOM Reception</div>
       <div class="meeting-row no-profile"><div class="m-name">Fosun Pharma</div></div>
       <div class="meeting-row no-profile"><div class="m-name">HuidaGene Therapeutics</div></div>
       <div class="meeting-row no-profile"><div class="m-name">NeuShen Therapeutics</div></div>
       <div class="meeting-row no-profile"><div class="m-name">Shanghai Unixell Biotechnology</div></div>
-      <div class="meeting-row no-profile"><div class="m-name">Guangzhou Intl Bio Island Group</div></div>
+      <div class="meeting-row no-profile"><div class="m-name">Guangzhou International Bio Island Group</div></div>
       <div class="meeting-row no-profile"><div class="m-name">Merck KGaA</div></div>
       <div class="meeting-row no-profile"><div class="m-name">CARsgen Therapeutics</div></div>
       <div class="meeting-row no-profile"><div class="m-name">Hillgene</div></div>
       <div class="meeting-row no-profile"><div class="m-name">JONESDAY</div></div>
-      <div class="meeting-row" onclick="goTo('humanwell')">
-        <div>
-          <div class="m-name">Humanwell Healthcare Group</div>
-          <div class="m-sub">David Wang · Sr. BD Director</div>
-        </div>
+
+      <div class="group-lbl" style="border-top:1px solid var(--border);margin-top:4px;padding-top:10px;">China Bio</div>
+      <div class="meeting-row no-profile"><div class="m-name">Biogen</div></div>
+      <div class="meeting-row" onclick="goTo('roche')">
+        <div><div class="m-name">Roche China</div><div class="m-sub">Sophie · BD Director</div></div>
         <span class="chevron">↓</span>
       </div>
+      <div class="meeting-row no-profile"><div class="m-name">Pharming Group N.V</div></div>
       <div class="meeting-row" onclick="goTo('cms')">
-        <div>
-          <div class="m-name">CMS (China Medical System)</div>
-          <div class="m-sub">ZiYe Shen · BD Director</div>
-        </div>
+        <div><div class="m-name">CMS (China Medical System)</div><div class="m-sub">ZiYe Shen · BD Director</div></div>
         <span class="chevron">↓</span>
       </div>
+      <div class="meeting-row" onclick="goTo('humanwell')">
+        <div><div class="m-name">Humanwell Healthcare Group</div><div class="m-sub">David Wang · Sr. BD Director</div></div>
+        <span class="chevron">↓</span>
+      </div>
+
+      <div class="group-lbl" style="border-top:1px solid var(--border);margin-top:4px;padding-top:10px;">Other On-site Meeting</div>
+      <div class="meeting-row no-profile"><div class="m-name">HK WinHealth</div></div>
+      <div class="meeting-row no-profile"><div class="m-name">CANbridge <span style="color:var(--muted);font-weight:400;font-size:0.8rem;">(Potential)</span></div></div>
     </div>
 
     <!-- Meeting Agenda -->
@@ -743,6 +739,149 @@
     </div><!-- /accordion -->
   </div><!-- /cms -->
 
+  <!-- ── ROCHE ── -->
+  <div class="company-block" id="roche">
+    <div class="company-hero">
+      <h2>Roche China</h2>
+      <div class="meet-pill">👤 Sophie · BD Director</div>
+    </div>
+    <div class="accordion">
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">1</div>
+          <div class="acc-title">Executive Summary</div>
+          <span class="acc-arrow open">▲</span>
+        </div>
+        <div class="acc-body open">
+          <p>Roche is a global biopharmaceutical leader with 7,000 employees in China and 2024 China revenue of CHF 5.328 billion. Neurology is one of Roche's three strategic pillars (alongside oncology and cardiovascular-metabolic), with global neurology revenue growing 13% in 2024.</p>
+          <p>Roche has a significant neuromuscular disease portfolio anchored by <strong>Evrysdi</strong> (risdiplam, SMA) — approved in 100+ countries with 18,000+ patients treated — and an ex-US commercialization partnership with Sarepta Therapeutics for <strong>Elevidys</strong> (DMD gene therapy). The neurodegenerative pipeline includes trontinemab (Alzheimer's, Phase III), prasinezumab (Parkinson's), and fenebrutinib (MS). Roche has publicly stated it is seeking first-in-class or best-in-class molecules from Asian biotechs.</p>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">2</div>
+          <div class="acc-title">Pipeline / Business Model Introduction (NMD Focus)</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <p>2024 China revenue was CHF 5.328 billion (pharma CHF 2.926B + diagnostics CHF 2.402B). Neurology is one of Roche's three shared priority disease areas, alongside oncology and cardiovascular-metabolic. Global neurology revenue grew 13% in 2024, driven mainly by Ocrevus, Evrysdi, and Elevidys.</p>
+          <p><strong>NMD portfolio:</strong></p>
+          <ul>
+            <li><strong>Evrysdi (risdiplam):</strong> Oral, non-invasive SMA therapy, approved in 100+ countries with 18,000+ patients treated globally (as of June 2025). Five-year SUNFISH data showed continued stabilisation of motor function in Types 2/3 SMA. US tablet formulation approved February 2025. Developed in collaboration with the SMA Foundation and PTC Therapeutics.</li>
+            <li><strong>Elevidys (delandistrogene moxeparvovec):</strong> Gene therapy for DMD, developed by Sarepta Therapeutics; Roche responsible for ex-US markets. In June 2025, FDA issued a safety alert following two deaths in non-ambulatory patients (acute liver failure); non-ambulatory indication removed and Boxed Warning added November 2025. EMA issued negative opinion July 2025. Currently indicated only for ambulatory patients aged 4+ with confirmed DMD gene mutation.</li>
+            <li><strong>Enspryng (satralizumab):</strong> Being studied for generalised myasthenia gravis (gMG).</li>
+          </ul>
+          <p><strong>Other neurodegenerative pipeline:</strong></p>
+          <ul>
+            <li><strong>Trontinemab:</strong> Brain-penetrant anti-amyloid antibody for Alzheimer's disease. Phase III initiated in 2025.</li>
+            <li><strong>Prasinezumab:</strong> Anti-alpha-synuclein antibody for Parkinson's disease.</li>
+            <li><strong>Alogabat:</strong> For Angelman syndrome.</li>
+            <li><strong>Fenebrutinib:</strong> Brain-penetrant BTK inhibitor for relapsing and progressive MS.</li>
+            <li><strong>RG6289:</strong> Gamma-secretase modulator for Alzheimer's disease.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">3</div>
+          <div class="acc-title">Deals & Transaction Summary in NMD (Last 3 Years)</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <ul>
+            <li><strong>2019 (ongoing):</strong> Collaboration with Sarepta Therapeutics for ex-US development and commercialization of Elevidys (DMD gene therapy).</li>
+            <li><strong>2025:</strong> Phase III Go decision for trontinemab in Alzheimer's disease. Zealand Pharma collaboration (pending closure).</li>
+          </ul>
+          <p>Roche's NMD portfolio is primarily driven by internal pipeline and the Sarepta partnership.</p>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">4</div>
+          <div class="acc-title">Corporate Strategy on NMD</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <p>Roche has explicitly positioned neurology — including neuromuscular disease — as one of three strategic pillars alongside oncology and cardiovascular-metabolic. The company's NMD strategy centers on Evrysdi (SMA franchise) and the Sarepta partnership for Elevidys (DMD). Global neurology revenue grew 13% in 2024.</p>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">5</div>
+          <div class="acc-title">Attendance with Title</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <p><strong>Sophie</strong> — BD Director</p>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">6</div>
+          <div class="acc-title">Background of Our Approach</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <ul>
+            <li><strong>~560,000 CMT patients in China</strong> experiencing progressive disability with no approved drugs globally.</li>
+            <li><strong>Phase 2a status targeting pivotal trial</strong> for conditional approval.
+              <ul style="margin-top:5px">
+                <li>ENCT platform advantages: &lt;20 days culture, reduced senescence, repeat dosing</li>
+                <li>Strong Phase 1 safety/efficacy</li>
+              </ul>
+            </li>
+            <li><strong>Seeking China partnership</strong> for licensing or co-development.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num editable">7</div>
+          <div class="acc-title">Questions Before the Meeting</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <div id="entries-roche-q" class="entries-list"></div>
+          <div class="new-entry-wrap">
+            <div class="new-entry-label">New Entry</div>
+            <textarea class="new-entry-area" id="new-roche-q"
+              placeholder="Type a question to prepare before the meeting…"></textarea>
+            <div class="new-entry-footer">
+              <button class="submit-btn" onclick="submitEntry('roche-q','new-roche-q')">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num editable">8</div>
+          <div class="acc-title">Meeting Notes</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <div id="entries-roche-n" class="entries-list"></div>
+          <div class="new-entry-wrap">
+            <div class="new-entry-label">New Entry</div>
+            <textarea class="new-entry-area" id="new-roche-n"
+              placeholder="Type your meeting notes here…"></textarea>
+            <div class="new-entry-footer">
+              <button class="submit-btn" onclick="submitEntry('roche-n','new-roche-n')">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /accordion -->
+  </div><!-- /roche -->
+
 </div><!-- /page -->
 
 <script>
@@ -771,23 +910,20 @@ async function dbLoad(key) {
       `${SB_URL}/rest/v1/notes?company_key=eq.${companyKey}&section=eq.${section}&select=entries`,
       { headers: SB_H }
     );
+    if (!r.ok) return [];
     const rows = await r.json();
-    return rows.length && rows[0].entries ? rows[0].entries : [];
+    return (rows.length && Array.isArray(rows[0].entries)) ? rows[0].entries : [];
   } catch { return []; }
 }
 
 async function dbSave(key, entries) {
   const { companyKey, section } = parseKey(key);
-  await fetch(`${SB_URL}/rest/v1/notes`, {
+  const r = await fetch(`${SB_URL}/rest/v1/notes`, {
     method: 'POST',
     headers: { ...SB_H, 'Prefer': 'resolution=merge-duplicates,return=minimal' },
-    body: JSON.stringify({
-      company_key: companyKey,
-      section,
-      entries,
-      updated_at: new Date().toISOString()
-    })
+    body: JSON.stringify({ company_key: companyKey, section, entries, updated_at: new Date().toISOString() })
   });
+  if (!r.ok) throw new Error(await r.text());
 }
 
 // ── SCROLL + HIGHLIGHT ────────────────────────────────────────────────────────
@@ -841,11 +977,17 @@ async function submitEntry(key, taId) {
   if (!ta || !ta.value.trim()) return;
   const btn = ta.closest('.new-entry-wrap').querySelector('.submit-btn');
   btn.textContent = 'Saving…'; btn.disabled = true;
-  const entries = await dbLoad(key);
-  entries.push({ text: ta.value.trim(), timestamp: new Date().toLocaleString() });
-  await dbSave(key, entries);
-  ta.value = '';
-  btn.textContent = 'Submit'; btn.disabled = false;
+  try {
+    const entries = await dbLoad(key);
+    entries.push({ text: ta.value.trim(), timestamp: new Date().toLocaleString() });
+    await dbSave(key, entries);
+    ta.value = '';
+  } catch(e) {
+    console.error(e);
+    alert('Save failed — check connection and try again.');
+  } finally {
+    btn.textContent = 'Submit'; btn.disabled = false;
+  }
   await renderEntries(key);
 }
 
@@ -872,21 +1014,49 @@ async function startEdit(key, idx) {
 async function saveEdit(key, idx) {
   const ta = document.getElementById('edit-ta-' + key + '-' + idx);
   if (!ta) return;
-  const btn = ta.closest('.entry-edit-btns').querySelector('.btn-save-edit');
+  const btn = ta.closest('.entry-edit-wrap').querySelector('.btn-save-edit');
   btn.textContent = 'Saving…'; btn.disabled = true;
-  const entries = await dbLoad(key);
-  entries[idx].text = ta.value.trim();
-  entries[idx].timestamp = entries[idx].timestamp + ' (edited ' + new Date().toLocaleString() + ')';
-  await dbSave(key, entries);
+  try {
+    const entries = await dbLoad(key);
+    if (entries[idx]) {
+      entries[idx].text = ta.value.trim();
+      entries[idx].timestamp = entries[idx].timestamp.split(' (edited')[0]
+        + ' (edited ' + new Date().toLocaleString() + ')';
+    }
+    await dbSave(key, entries);
+  } catch(e) {
+    console.error(e);
+    alert('Save failed — check connection and try again.');
+    btn.textContent = 'Save'; btn.disabled = false;
+    return;
+  }
   await renderEntries(key);
 }
 
 // ── DELETE ENTRY ──────────────────────────────────────────────────────────────
-async function deleteEntry(key, idx) {
-  if (!confirm('Delete this entry?')) return;
-  const entries = await dbLoad(key);
-  entries.splice(idx, 1);
-  await dbSave(key, entries);
+function deleteEntry(key, idx) {
+  const card = document.getElementById('entry-' + key + '-' + idx);
+  if (!card) return;
+  card.innerHTML = `
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:4px 0">
+      <span style="font-size:0.84rem;color:var(--text)">Delete this entry?</span>
+      <div style="display:flex;gap:8px">
+        <button class="btn-cancel-edit" onclick="renderEntries('${key}')">Cancel</button>
+        <button class="delete-btn" onclick="confirmDelete('${key}',${idx})">Yes, delete</button>
+      </div>
+    </div>`;
+}
+
+async function confirmDelete(key, idx) {
+  try {
+    const entries = await dbLoad(key);
+    entries.splice(idx, 1);
+    await dbSave(key, entries);
+  } catch(e) {
+    console.error(e);
+    alert('Delete failed — try again.');
+    return;
+  }
   await renderEntries(key);
 }
 
@@ -901,7 +1071,7 @@ function escHtml(str) {
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', () => {
-  ['humanwell-q','humanwell-n','cms-q','cms-n'].forEach(renderEntries);
+  ['humanwell-q','humanwell-n','cms-q','cms-n','roche-q','roche-n'].forEach(renderEntries);
 });
 </script>
 </body>
