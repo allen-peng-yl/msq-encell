@@ -137,12 +137,13 @@
 
   /* ── GROUP LABEL inside card ── */
   .group-lbl {
-    padding: 8px 18px 4px;
+    padding: 7px 18px;
     font-size: 0.68rem;
     font-weight: 700;
     letter-spacing: 0.08em;
-    color: var(--muted);
     text-transform: uppercase;
+    background: #1a7cc2;
+    color: #ffffff;
   }
 
   /* ── SECTION LABEL ── */
@@ -398,7 +399,7 @@
   <div class="header-left">
     <div>
       <h1>ENCell – Conference Meeting Booklet</h1>
-      <p>EN001 Partnership Exploration · BIOCOM 2025</p>
+      <p>EN001 Partnership Exploration</p>
     </div>
   </div>
 
@@ -435,8 +436,11 @@
       <div class="meeting-row no-profile"><div class="m-name">Hillgene</div></div>
       <div class="meeting-row no-profile"><div class="m-name">JONESDAY</div></div>
 
-      <div class="group-lbl" style="border-top:1px solid var(--border);margin-top:4px;padding-top:10px;">China Bio</div>
-      <div class="meeting-row no-profile"><div class="m-name">Biogen</div></div>
+      <div class="group-lbl">China Bio</div>
+      <div class="meeting-row" onclick="goTo('biogen')">
+        <div><div class="m-name">Biogen</div><div class="m-sub">Yves Wyckmans · Intl BD Lead</div></div>
+        <span class="chevron">↓</span>
+      </div>
       <div class="meeting-row" onclick="goTo('roche')">
         <div><div class="m-name">Roche China</div><div class="m-sub">Sophie · BD Director</div></div>
         <span class="chevron">↓</span>
@@ -451,8 +455,11 @@
         <span class="chevron">↓</span>
       </div>
 
-      <div class="group-lbl" style="border-top:1px solid var(--border);margin-top:4px;padding-top:10px;">Other On-site Meeting</div>
-      <div class="meeting-row no-profile"><div class="m-name">HK WinHealth</div></div>
+      <div class="group-lbl">Other On-site Meeting</div>
+      <div class="meeting-row" onclick="goTo('winhealth')">
+        <div><div class="m-name">HK WinHealth</div><div class="m-sub">David Jiang · BD Director</div></div>
+        <span class="chevron">↓</span>
+      </div>
       <div class="meeting-row no-profile"><div class="m-name">CANbridge <span style="color:var(--muted);font-weight:400;font-size:0.8rem;">(Potential)</span></div></div>
     </div>
 
@@ -882,6 +889,264 @@
     </div><!-- /accordion -->
   </div><!-- /roche -->
 
+  <!-- ── BIOGEN ── -->
+  <div class="company-block" id="biogen">
+    <div class="company-hero">
+      <h2>Biogen</h2>
+      <div class="meet-pill">👤 Yves Wyckmans · International BD Lead</div>
+    </div>
+    <div class="accordion">
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">1</div>
+          <div class="acc-title">Executive Summary</div>
+          <span class="acc-arrow open">▲</span>
+        </div>
+        <div class="acc-body open">
+          <p>Biogen (NASDAQ: BIIB, Q1 2025 revenue $2.43B, +6% YoY) is undergoing a strategic transformation from a legacy MS company to a rare neuromuscular and neurological disease company. Its rare disease franchise — <strong>Spinraza</strong> (SMA), <strong>Skyclarys</strong> (Friedreich's ataxia, acquired via $7.3B Reata buyout), and <strong>Qalsody</strong> (SOD1-ALS) — generated $563M in Q1 2025 (+33% YoY), now representing ~45% of promoted product revenue.</p>
+          <p>The company actively pursues external rare disease assets through licensing and acquisition, with a global network of 45+ affiliates and distribution partners in over 60 additional countries.</p>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">2</div>
+          <div class="acc-title">Pipeline / Business Model Introduction (NMD Focus)</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <p><strong>NMD / Rare Disease portfolio:</strong></p>
+          <ul>
+            <li><strong>Spinraza (nusinersen):</strong> First FDA-approved SMA therapy (December 2016). Antisense oligonucleotide, intrathecal injection. Became Biogen's best-selling drug in Q1 2025. FDA approved High Dose Regimen in March 2026 (DEVOTE study). Salanersen (next-gen SMA ASO) advancing to registrational stage.</li>
+            <li><strong>Skyclarys (omaveloxolone):</strong> First and only approved treatment for Friedreich's ataxia, acquired via $7.3B Reata Pharmaceuticals buyout (Q4 2023). Q1 2025 global revenue ~$124M (+59% YoY), ~2,400 patients on therapy globally. Commercialized in 40+ countries. Pediatric Phase 3 BRAVE study (ages 2–16) initiated June 2025.</li>
+            <li><strong>Qalsody (tofersen):</strong> ASO therapy for SOD1-ALS. Commercially available in the US and EU.</li>
+          </ul>
+          <p>Rare disease revenue: <strong>$563M in Q1 2025 (+33% YoY)</strong>, ~45% of promoted product revenue.</p>
+          <p><strong>Neurodegenerative pipeline:</strong></p>
+          <ul>
+            <li><strong>Leqembi (lecanemab):</strong> Anti-amyloid antibody for Alzheimer's (50/50 collaboration with Eisai). EU approval April 2025; US maintenance dosing approved January 2025.</li>
+            <li><strong>Litifilimab:</strong> Anti-BDCA2 antibody, Phase 3 in SLE and cutaneous lupus (Breakthrough Therapy Designation).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">3</div>
+          <div class="acc-title">Deals & Transaction Summary in NMD (Last 3 Years)</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <ul>
+            <li><strong>2023:</strong> Acquired Reata Pharmaceuticals for $7.3B — adding Skyclarys, first approved treatment for Friedreich's ataxia.</li>
+            <li><strong>2025:</strong> Agreement with Stoke Therapeutics for zorevunersen (Dravet syndrome, rare genetic epilepsy; pivotal Phase 3 expected to initiate). Acquired Alcyone Therapeutics (~$85M) for ThecaFlex DRx intrathecal delivery technology.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">4</div>
+          <div class="acc-title">Corporate Strategy on NMD</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <p>Biogen CEO has described the company as transforming from an MS company to a rare disease and neurology company. Rare disease now represents ~45% of promoted product revenue. The late-stage pipeline includes 10+ registrational studies expected to read out over the next four years.</p>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">5</div>
+          <div class="acc-title">Attendance with Title</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <p><strong>Yves Wyckmans</strong> — International Business Development Lead</p>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">6</div>
+          <div class="acc-title">Background of Our Approach</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <p>EN001 as a modality extension to Biogen's neuromuscular disease franchise:</p>
+          <ul>
+            <li><strong>Same disease burden, zero competition:</strong> Like SMA and ALS, CMT is a progressive neuromuscular disorder — yet zero approved drugs exist globally for ~560,000 patients in China. EN001's validated repeat-dosing MSC therapy complements Biogen's ASO platforms by addressing chronic tissue repair and functional restoration.</li>
+            <li><strong>Chronic management synergy:</strong> SPINRAZA's success is built on lifelong repeat dosing. EN001's validated repeat-dosing safety supports the same chronic disease management model, with potentially broader patient convenience (IV/IM vs. intrathecal).</li>
+            <li><strong>Rare-to-mass-market pivot:</strong> CMT entry point (~560K China patients) → sarcopenia second indication (20.7% China 60+ prevalence, zero approved drugs globally). Biogen's global rare disease access network could unlock both markets.</li>
+            <li><strong>De-risked, late-stage:</strong> Phase 1 completed with no SAEs, 6.2-point CMTNSv2 improvement reversing 10+ years of progression; Korea conditional approval pathway established.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num editable">7</div>
+          <div class="acc-title">Questions Before the Meeting</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <div id="entries-biogen-q" class="entries-list"></div>
+          <div class="new-entry-wrap">
+            <div class="new-entry-label">New Entry</div>
+            <textarea class="new-entry-area" id="new-biogen-q" placeholder="Type a question to prepare before the meeting…"></textarea>
+            <div class="new-entry-footer">
+              <button class="submit-btn" onclick="submitEntry('biogen-q','new-biogen-q')">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num editable">8</div>
+          <div class="acc-title">Meeting Notes</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <div id="entries-biogen-n" class="entries-list"></div>
+          <div class="new-entry-wrap">
+            <div class="new-entry-label">New Entry</div>
+            <textarea class="new-entry-area" id="new-biogen-n" placeholder="Type your meeting notes here…"></textarea>
+            <div class="new-entry-footer">
+              <button class="submit-btn" onclick="submitEntry('biogen-n','new-biogen-n')">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /biogen -->
+
+  <!-- ── WINHEALTH ── -->
+  <div class="company-block" id="winhealth">
+    <div class="company-hero">
+      <h2>HK WinHealth Pharma Group</h2>
+      <div class="meet-pill">👤 David Jiang · BD Director</div>
+    </div>
+    <div class="accordion">
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">1</div>
+          <div class="acc-title">Executive Summary</div>
+          <span class="acc-arrow open">▲</span>
+        </div>
+        <div class="acc-body open">
+          <p>Hong Kong WinHealth Pharma Group (private, founded 2006) is a China-based biopharmaceutical company focused on licensing-in and commercializing innovative therapies, with core operations in nephrology, hematology, and rare diseases. Headquartered in Hong Kong with hubs in Hangzhou, Shanghai, Beijing, and representative offices in Japan, Singapore, and Europe.</p>
+          <p>In 2024, WinHealth acquired 100% equity of Kyowa Kirin China (up to RMB 720M / ~US$104M), transforming the company into an integrated pharma enterprise. Key NMD-relevant assets: <strong>CRYSViTA®</strong> (burosumab) for X-linked hypophosphatemia; China's first rare disease <strong>Bo'ao Managed Access Platform</strong> (22+ overseas-approved orphan drugs); and a five-year strategic collaboration with <strong>China Alliance for Rare Diseases (CARD)</strong>.</p>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">2</div>
+          <div class="acc-title">Pipeline / Business Model Introduction (NMD Focus)</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <ul>
+            <li><strong>CRYSViTA® (burosumab):</strong> Recombinant fully human monoclonal antibody against FGF23, for X-linked hypophosphatemia (XLH) and tumor-induced osteomalacia (TIO). Long-term China commercialization rights obtained via license agreement with Kyowa Kirin (2024).</li>
+            <li><strong>Bo'ao Managed Access Platform:</strong> Launched April 2020 at Hainan Bo'ao Lecheng International Medical Tourism Pilot Zone — China's sole "medical special zone" enabling compassionate use of overseas-approved but not yet NMPA-approved drugs. 22+ innovative rare disease drugs included, such as amifampridine (for Lambert-Eaton myasthenic syndrome, an NMD). Represents a potential early access pathway for EN001 prior to full NMPA approval.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">3</div>
+          <div class="acc-title">Deals & Transaction Summary in NMD (Last 3 Years)</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <ul>
+            <li><strong>Kyowa Kirin — CRYSViTA® License (August 2024):</strong> Long-term China commercialization rights to burosumab for XLH, as part of Kyowa Kirin China restructuring (completed September 30, 2024).</li>
+            <li><strong>China Alliance for Rare Diseases (CARD) — Five-Year Strategic Collaboration (September 2021):</strong> Covering rare disease registration and research, diagnosis and treatment guidelines, doctor training, and patient networks. Directly applicable to NMD clinical site identification and patient recruitment in China.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">4</div>
+          <div class="acc-title">Corporate Strategy on NMD</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <p style="color:var(--muted);font-style:italic;">No publicly stated NMD or neurology strategy.</p>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">5</div>
+          <div class="acc-title">Attendance with Title</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <p><strong>David Jiang</strong> — BD Director</p>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">6</div>
+          <div class="acc-title">Background of Our Approach</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <ul>
+            <li><strong>De-risked & Late-Stage Asset:</strong> Currently in South Korean registrational Phase 2 (pivotal-ready) with conditional approval granted and U.S. FDA Orphan Drug Designation secured, offering a clear regulatory pathway.</li>
+            <li><strong>Rare to Mass Indication Expansion:</strong> Strategically moving from a rare disease entry point (CMT, ~560k Chinese patients) into a mass market (Sarcopenia, 20.7% prevalence in China's 60+ population), targeting tens of millions of patients.</li>
+            <li><strong>Excellent Efficacy & Safety Profile:</strong> Demonstrated a 6.2-point average CMTNS improvement with an 83%+ response rate; validated as the only stem cell therapy in the CMT field with repeat-dose safety for long-term chronic management.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num editable">7</div>
+          <div class="acc-title">Questions Before the Meeting</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <div id="entries-winhealth-q" class="entries-list"></div>
+          <div class="new-entry-wrap">
+            <div class="new-entry-label">New Entry</div>
+            <textarea class="new-entry-area" id="new-winhealth-q" placeholder="Type a question to prepare before the meeting…"></textarea>
+            <div class="new-entry-footer">
+              <button class="submit-btn" onclick="submitEntry('winhealth-q','new-winhealth-q')">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num editable">8</div>
+          <div class="acc-title">Meeting Notes</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <div id="entries-winhealth-n" class="entries-list"></div>
+          <div class="new-entry-wrap">
+            <div class="new-entry-label">New Entry</div>
+            <textarea class="new-entry-area" id="new-winhealth-n" placeholder="Type your meeting notes here…"></textarea>
+            <div class="new-entry-footer">
+              <button class="submit-btn" onclick="submitEntry('winhealth-n','new-winhealth-n')">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /winhealth -->
+
 </div><!-- /page -->
 
 <script>
@@ -918,9 +1183,16 @@ async function dbLoad(key) {
 
 async function dbSave(key, entries) {
   const { companyKey, section } = parseKey(key);
-  const r = await fetch(`${SB_URL}/rest/v1/notes`, {
+  const base   = `${SB_URL}/rest/v1/notes`;
+  const filter = `?company_key=eq.${companyKey}&section=eq.${section}`;
+
+  // DELETE existing row (safe even if it doesn't exist yet)
+  await fetch(base + filter, { method: 'DELETE', headers: SB_H });
+
+  // INSERT fresh row
+  const r = await fetch(base, {
     method: 'POST',
-    headers: { ...SB_H, 'Prefer': 'resolution=merge-duplicates,return=minimal' },
+    headers: { ...SB_H, 'Prefer': 'return=minimal' },
     body: JSON.stringify({ company_key: companyKey, section, entries, updated_at: new Date().toISOString() })
   });
   if (!r.ok) throw new Error(await r.text());
@@ -1071,7 +1343,7 @@ function escHtml(str) {
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', () => {
-  ['humanwell-q','humanwell-n','cms-q','cms-n','roche-q','roche-n'].forEach(renderEntries);
+  ['humanwell-q','humanwell-n','cms-q','cms-n','roche-q','roche-n','biogen-q','biogen-n','winhealth-q','winhealth-n'].forEach(renderEntries);
 });
 </script>
 </body>
