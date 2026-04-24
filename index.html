@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ENCell – Conference Meeting Booklet</title>
+<style>
+  :root {
+    --primary: #0a4f6e;
+    --accent: #1a9cbe;
+    --light: #e8f4f9;
+    --text: #1a2533;
+    --muted: #6b7f8e;
+    --border: #c8dde6;
+    --white: #ffffff;
+    --success: #2a7a4f;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #f2f6fa;
+    color: var(--text);
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: #111111;
+    color: white;
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .header-left { display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; }
+
+  .logo-mark {
+    width: 42px; height: 42px;
+    background: white;
+    border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 16px; color: var(--primary);
+    letter-spacing: -1px; flex-shrink: 0;
+  }
+
+  header h1 { font-size: 1.2rem; font-weight: 700; line-height: 1.2; }
+  header p  { font-size: 0.78rem; opacity: 0.75; margin-top: 2px; }
+
+  /* ── HEADER LOGOS (right side) ── */
+  .header-logos {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .header-logo-slot {
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header-logo-slot img {
+    max-height: 42px;
+    max-width: 120px;
+    object-fit: contain;
+    display: block;
+    filter: brightness(0) invert(1);
+  }
+
+  /* ── LAYOUT ── */
+  .page { max-width: 900px; margin: 0 auto; padding: 26px 20px 80px; }
+
+  /* ── TOP PANEL ── */
+  .top-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  @media (max-width: 640px) {
+    .top-panel { grid-template-columns: 1fr; }
+    header { padding: 14px 16px; }
+    header h1 { font-size: 1rem; }
+    .header-logo-slot { max-width: 80px; height: 32px; }
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+
+  .card-head {
+    background: var(--light);
+    border-bottom: 1.5px solid var(--border);
+    padding: 11px 18px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+
+  /* ── AGENDA ROWS ── */
+  .agenda-row {
+    display: flex;
+    gap: 12px;
+    padding: 11px 18px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.84rem;
+    line-height: 1.5;
+  }
+  .agenda-row:last-child { border-bottom: none; }
+  .agenda-time { color: var(--accent); font-weight: 700; white-space: nowrap; min-width: 58px; }
+
+  /* ── MEETING ROWS ── */
+  .meeting-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 11px 18px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.86rem;
+    cursor: pointer;
+    transition: background 0.15s;
+    gap: 8px;
+  }
+  .meeting-row:last-child { border-bottom: none; }
+  .meeting-row:hover { background: var(--light); }
+  .meeting-row.no-profile { cursor: default; opacity: 0.5; }
+  .meeting-row.no-profile:hover { background: none; }
+
+  .m-name { font-weight: 600; color: var(--text); }
+  .m-sub  { font-size: 0.74rem; color: var(--muted); margin-top: 1px; }
+  .chevron { color: var(--accent); font-size: 1rem; flex-shrink: 0; }
+
+  /* ── GROUP LABEL inside card ── */
+  .group-lbl {
+    padding: 8px 18px 4px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+    padding-left: 2px;
+  }
+
+  /* ── COMPANY BLOCK ── */
+  .company-block {
+    margin-bottom: 40px;
+    scroll-margin-top: 88px;
+  }
+
+  @keyframes flashHighlight {
+    0%   { box-shadow: 0 0 0 5px rgba(26,156,190,0.65); }
+    100% { box-shadow: 0 0 0 0px rgba(26,156,190,0); }
+  }
+  .company-block.highlight { animation: flashHighlight 1.3s ease-out; }
+
+  .company-hero {
+    background: #111111;
+    color: white;
+    padding: 22px 26px;
+    border-radius: 12px 12px 0 0;
+  }
+  .company-hero h2 { font-size: 1.3rem; font-weight: 800; }
+  .meet-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 9px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.79rem;
+    font-weight: 600;
+  }
+
+  /* ── ACCORDION ── */
+  .accordion {
+    border: 1.5px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    overflow: hidden;
+  }
+
+  .acc-item { border-bottom: 1px solid var(--border); }
+  .acc-item:last-child { border-bottom: none; }
+
+  .acc-header {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 12px 18px;
+    background: var(--light);
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .acc-header:hover { background: #d6eaf4; }
+
+  .acc-num {
+    width: 24px; height: 24px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    font-size: 0.72rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .acc-num.editable { background: var(--success); }
+
+  .acc-title { font-weight: 700; font-size: 0.88rem; color: var(--primary); flex: 1; }
+  .acc-arrow { color: var(--muted); font-size: 0.8rem; transition: transform 0.2s; }
+  .acc-arrow.open { transform: rotate(180deg); }
+
+  .acc-body {
+    padding: 16px 20px;
+    font-size: 0.86rem;
+    line-height: 1.8;
+    color: var(--text);
+    display: none;
+    background: white;
+  }
+  .acc-body.open { display: block; }
+  .acc-body p { margin-bottom: 9px; }
+  .acc-body p:last-child { margin-bottom: 0; }
+  .acc-body ul { padding-left: 18px; margin: 7px 0; }
+  .acc-body li { margin-bottom: 5px; }
+  .acc-body strong { color: var(--primary); }
+
+  /* ── ENTRY CARDS (submitted notes/questions) ── */
+  .entries-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+
+  .entry-card {
+    background: #f7fbfd;
+    border: 1.5px solid var(--border);
+    border-radius: 9px;
+    padding: 12px 14px;
+  }
+
+  .entry-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    gap: 10px;
+  }
+
+  .entry-ts {
+    font-size: 0.72rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .edit-btn {
+    background: none;
+    border: 1.5px solid var(--accent);
+    color: var(--accent);
+    padding: 3px 12px;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+  .edit-btn:hover { background: var(--accent); color: white; }
+
+  .delete-btn {
+    background: none;
+    border: 1.5px solid #d9534f;
+    color: #d9534f;
+    padding: 3px 10px;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+  .delete-btn:hover { background: #d9534f; color: white; }
+
+  .entry-text {
+    white-space: pre-wrap;
+    font-size: 0.86rem;
+    line-height: 1.75;
+    color: var(--text);
+  }
+
+  .entry-edit-wrap { display: flex; flex-direction: column; gap: 8px; }
+
+  textarea.entry-textarea {
+    width: 100%; min-height: 100px;
+    border: 1.5px solid var(--accent);
+    border-radius: 7px;
+    padding: 9px 11px;
+    font-size: 0.86rem;
+    font-family: inherit;
+    line-height: 1.7;
+    color: var(--text);
+    resize: vertical;
+    outline: none;
+  }
+
+  .entry-edit-btns { display: flex; gap: 8px; justify-content: flex-end; }
+
+  .btn-save-edit {
+    background: var(--success);
+    color: white;
+    border: none;
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .btn-save-edit:hover { background: #1f5f3c; }
+
+  .btn-cancel-edit {
+    background: none;
+    border: 1.5px solid var(--border);
+    color: var(--muted);
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  /* ── NEW ENTRY AREA ── */
+  .new-entry-wrap {
+    border-top: 1px dashed var(--border);
+    padding-top: 12px;
+    margin-top: 4px;
+  }
+
+  .new-entry-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 7px;
+  }
+
+  textarea.new-entry-area {
+    width: 100%; min-height: 110px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 0.86rem;
+    font-family: inherit;
+    line-height: 1.7;
+    color: var(--text);
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  textarea.new-entry-area:focus { border-color: var(--accent); }
+
+  .new-entry-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 8px;
+  }
+
+  .submit-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 8px 22px;
+    border-radius: 7px;
+    font-size: 0.83rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .submit-btn:hover { background: #083d56; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <div class="logo-mark">EN</div>
+    <div>
+      <h1>ENCell – Conference Meeting Booklet</h1>
+      <p>EN001 Partnership Exploration · BIOCOM 2025</p>
+    </div>
+  </div>
+
+  <!-- Right-side logos: put encell_logo.png and msq_logo.png in the same folder -->
+  <div class="header-logos">
+    <div class="header-logo-slot" id="slot-encell">
+      <img src="encell_logo_transparent.png" alt="ENCell"
+           onerror="this.parentElement.innerHTML='ENCell'">
+    </div>
+    <div class="header-logo-slot" id="slot-msq">
+      <img src="msq_logo_transparent.png" alt="MSQ"
+           onerror="this.parentElement.innerHTML='MSQ'">
+    </div>
+  </div>
+</header>
+
+<div class="page">
+
+  <!-- ══ TOP PANEL ══ -->
+  <div class="top-panel">
+
+    <!-- Confirmed Meetings -->
+    <div class="card">
+      <div class="card-head">Confirmed Meetings</div>
+      <div class="group-lbl">BIOCOM Reception</div>
+      <div class="meeting-row no-profile"><div class="m-name">Fosun Pharma</div></div>
+      <div class="meeting-row no-profile"><div class="m-name">HuidaGene Therapeutics</div></div>
+      <div class="meeting-row no-profile"><div class="m-name">NeuShen Therapeutics</div></div>
+      <div class="meeting-row no-profile"><div class="m-name">Shanghai Unixell Biotechnology</div></div>
+      <div class="meeting-row no-profile"><div class="m-name">Guangzhou Intl Bio Island Group</div></div>
+      <div class="meeting-row no-profile"><div class="m-name">Merck KGaA</div></div>
+      <div class="meeting-row no-profile"><div class="m-name">CARsgen Therapeutics</div></div>
+      <div class="meeting-row no-profile"><div class="m-name">Hillgene</div></div>
+      <div class="meeting-row no-profile"><div class="m-name">JONESDAY</div></div>
+      <div class="meeting-row" onclick="goTo('humanwell')">
+        <div>
+          <div class="m-name">Humanwell Healthcare Group</div>
+          <div class="m-sub">David Wang · Sr. BD Director</div>
+        </div>
+        <span class="chevron">↓</span>
+      </div>
+      <div class="meeting-row" onclick="goTo('cms')">
+        <div>
+          <div class="m-name">CMS (China Medical System)</div>
+          <div class="m-sub">ZiYe Shen · BD Director</div>
+        </div>
+        <span class="chevron">↓</span>
+      </div>
+    </div>
+
+    <!-- Meeting Agenda -->
+    <div class="card">
+      <div class="card-head">Meeting Agenda</div>
+      <div class="agenda-row">
+        <span class="agenda-time">Evening</span>
+        <div>
+          <strong>BIOCOM Reception</strong><br>
+          Fosun Pharma, HuidaGene, NeuShen, Unixell, Bio Island, Merck KGaA, CARsgen, Hillgene, JONESDAY
+        </div>
+      </div>
+      <div class="agenda-row">
+        <span class="agenda-time">TBD</span>
+        <div>
+          <strong>Humanwell Healthcare Group</strong><br>
+          1-on-1 · David Wang, Sr. BD Director
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══ COMPANY PROFILES ══ -->
+  <div class="section-label">Company Profiles</div>
+
+  <!-- ── HUMANWELL ── -->
+  <div class="company-block" id="humanwell">
+    <div class="company-hero">
+      <h2>Humanwell Healthcare Group</h2>
+      <div class="meet-pill">👤 David Wang · Sr. BD Director</div>
+    </div>
+    <div class="accordion">
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">1</div>
+          <div class="acc-title">Executive Summary</div>
+          <span class="acc-arrow open">▲</span>
+        </div>
+        <div class="acc-body open">
+          <p>Humanwell Healthcare Group is a large-cap Chinese pharma company (revenue ~USD 3.3B, market cap ~USD 4.45B) with leading market positions in neurology drugs, particularly anesthesia and analgesia. The company's neurology portfolio spans narcotic analgesics, anesthetic agents, and recently approved anti-Parkinson's drugs, distributed through neurology departments across China's hospital network.</p>
+          <p>Under new ownership by <strong>China Merchants Group (2025)</strong>, the company is focused on consolidating its neurology franchise and expanding into innovative drug development. Key subsidiaries include <strong>Yichang Humanwell</strong> (flagship innovative drug unit), <strong>Epic Pharma</strong> (US generics), and <strong>Paion AG</strong> (Germany, hospital sedation/critical care).</p>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">2</div>
+          <div class="acc-title">Pipeline / Business Model Introduction (NMD Focus)</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <p>Humanwell is a fully-integrated Chinese pharma company (SSE: 600079) with dominant positions in China's anesthesia and analgesia market. Its core subsidiary <strong>Yichang Humanwell</strong> is Asia's largest designated R&D and production base for narcotic drugs, with neurology-related drug revenue reaching approximately <strong>RMB 75 billion in 2024 (+11%)</strong>.</p>
+          <p><strong>Key neurology-relevant products and pipeline include:</strong></p>
+          <ul>
+            <li><strong>Marketed products:</strong> Remifentanil (market share ~90%), sufentanil, hydromorphone ER tablets, oxycodone ER tablets, esketamine injection, etomidate injection.</li>
+            <li><strong>Recent approvals:</strong> Levodopa-benserazide tablets (anti-Parkinson's, March 2025). Market size >RMB 1B (2023), ~7% growth H1 2024.</li>
+            <li><strong>Biologics pipeline — pUDK-HGF:</strong> Class 1 biologic (plasmid-based HGF gene therapy) for severe lower limb ischemia. NDA submitted Dec 2024, withdrawn Dec 2025 for supplementation; plans to resubmit.</li>
+            <li><strong>Other CNS pipeline:</strong> ~60 R&D programs including Nav1.8 channel inhibitor (pain), tapentadol, hydrocodone/ibuprofen tablets.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">3</div>
+          <div class="acc-title">Deals & Transaction Summary in NMD (Last 3 Years)</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <p>No neurology/NMD-specific licensing or partnership deals identified in public sources.</p>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">4</div>
+          <div class="acc-title">Corporate Strategy on NMD</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <p>None of Humanwell's stated strategic priorities include neuromuscular disease, regenerative medicine, cell/gene therapy for NMD, or rare disease. The closest thematic link to EN001 is Humanwell's broad "CNS" branding, but in practice this is limited to anesthesia and pain pharmacology.</p>
+          <p>Humanwell's stated strategy is to be a leader in pharmaceutical sub-segments, with neurology drugs as its primary strategic focus area alongside steroidal hormones and Uyghur medicines.</p>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">5</div>
+          <div class="acc-title">Attendance with Title</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <p><strong>David Wang</strong> — Sr. BD Director</p>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">6</div>
+          <div class="acc-title">Background of Our Approach</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <ul>
+            <li><strong>CNS alignment:</strong> CMT as a progressive neuromuscular disorder (~560,000 patients in China, zero approved drugs globally) positioned as a natural extension of Humanwell's neurological therapeutic focus.</li>
+            <li><strong>Biologics entry point:</strong> EN001 as a Phase 2a pivotal-ready, de-risked cell therapy pathway complementing Humanwell's R&D investment in innovative modalities.</li>
+            <li><strong>Commercial synergy:</strong> Sarcopenia (second indication, 20.7% China 60+ prevalence) aligned with Humanwell's hospital network strengths.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SECTION 7 – editable -->
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num editable">7</div>
+          <div class="acc-title">Questions Before the Meeting</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <div id="entries-humanwell-q" class="entries-list"></div>
+          <div class="new-entry-wrap">
+            <div class="new-entry-label">New Entry</div>
+            <textarea class="new-entry-area" id="new-humanwell-q"
+              placeholder="Type a question to prepare before the meeting…"></textarea>
+            <div class="new-entry-footer">
+              <button class="submit-btn" onclick="submitEntry('humanwell-q', 'new-humanwell-q')">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 8 – editable -->
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num editable">8</div>
+          <div class="acc-title">Meeting Notes</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <div id="entries-humanwell-n" class="entries-list"></div>
+          <div class="new-entry-wrap">
+            <div class="new-entry-label">New Entry</div>
+            <textarea class="new-entry-area" id="new-humanwell-n"
+              placeholder="Type your meeting notes here…"></textarea>
+            <div class="new-entry-footer">
+              <button class="submit-btn" onclick="submitEntry('humanwell-n', 'new-humanwell-n')">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /accordion -->
+  </div><!-- /humanwell -->
+
+  <!-- ── CMS ── -->
+  <div class="company-block" id="cms">
+    <div class="company-hero">
+      <h2>CMS (China Medical System)</h2>
+      <div class="meet-pill">👤 ZiYe Shen · BD Director</div>
+    </div>
+    <div class="accordion">
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">1</div>
+          <div class="acc-title">Executive Summary</div>
+          <span class="acc-arrow open">▲</span>
+        </div>
+        <div class="acc-body open">
+          <p>CMS is a specialty pharma commercialization platform (HKEX: 0867, SGX: 8A8) with 2024 turnover of RMB 7,469 million and a promotion network covering 50,000+ hospitals across China. CNS is a core therapeutic area, with active neurology products including <strong>VALTOCO</strong> (diazepam nasal spray for epilepsy seizures, NMPA-approved 2023) and <strong>ZUNVEYL</strong> (benzgalantamine for Alzheimer's, licensed from Alpha Cognition in Jan 2025, China NDA accepted July 2025). CMS also commercializes rare disease products including Tetrabenazine (Huntington's chorea).</p>
+          <p>As a pure licensing/commercialization platform with established CNS and rare disease regulatory track record, CMS represents a potential partner for EN001's China commercialization.</p>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">2</div>
+          <div class="acc-title">Pipeline / Business Model Introduction (NMD Focus)</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <p>CMS is a pure commercialization platform (no manufacturing) listed on HKEX and SGX, with a promotion network covering over 50,000 hospitals and medical institutions and approximately 250,000 retail pharmacies in China, supported by approximately 4,400 professional academic promotional staff (as of end-2023). CNS is one of six core therapeutic areas. 2024 turnover was RMB 7,469 million.</p>
+          <p><strong>Key neurology-relevant products and pipeline:</strong></p>
+          <ul>
+            <li><strong>VALTOCO (Diazepam Nasal Spray):</strong> NMPA-approved June 7, 2023 for acute treatment of seizure clusters/acute repetitive seizures in epilepsy patients aged 6+. First diazepam nasal spray in China. Included in China's NRDL Category B effective January 2024. A real-world clinical study enrolling ~10,000 cases is underway in China.</li>
+            <li><strong>ZUNVEYL (Benzgalantamine):</strong> Licensed from Alpha Cognition (Jan 2025, $44M total deal value including $6M upfront) for exclusive development and commercialization in Asia (excl. Japan), Australia, and New Zealand. FDA-approved July 2024 for mild-to-moderate Alzheimer's disease. NDA accepted by NMPA on July 28, 2025. Next-generation acetylcholinesterase inhibitor designed to reduce GI side effects.</li>
+            <li><strong>Tetrabenazine Tablets:</strong> Rare disease drug for Huntington's disease chorea, newly included in NRDL Category B (2023 version), effective January 2024.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">3</div>
+          <div class="acc-title">Deals & Transaction Summary in NMD (Last 3 Years)</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <ul>
+            <li><strong>Jan 2025:</strong> Exclusive license from Alpha Cognition for ZUNVEYL (benzgalantamine) in Asia/Australia/NZ — $44M total deal value ($6M upfront + milestones), for Alzheimer's disease.</li>
+            <li><strong>2023:</strong> Licensed-in VALTOCO (diazepam nasal spray) — NMPA-approved and included in NRDL within the same year.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">4</div>
+          <div class="acc-title">Corporate Strategy on NMD</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <p>CNS is one of six core therapeutic areas. The company builds its portfolio through licensing-in, asset acquisition, and equity investment.</p>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">5</div>
+          <div class="acc-title">Attendance with Title</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <p><strong>ZiYe Shen</strong> — BD Director</p>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num">6</div>
+          <div class="acc-title">Background of Our Approach</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <ul>
+            <li><strong>De-risked & Late-Stage Asset:</strong> Currently in South Korean registrational Phase 2 (pivotal-ready) with conditional approval granted and U.S. FDA Orphan Drug Designation secured, offering a clear regulatory pathway.</li>
+            <li><strong>Rare to Mass Indication Expansion:</strong> Strategically moving from a rare disease entry point (CMT, ~560k Chinese patients) into a mass market (Sarcopenia, 20.7% prevalence in China's 60+ population), targeting tens of millions of patients.</li>
+            <li><strong>Excellent Efficacy & Safety Profile:</strong> Demonstrated a 6.2-point average CMTNS improvement with an 83%+ response rate; validated as the only stem cell therapy in the CMT field with repeat-dose safety for long-term chronic management.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num editable">7</div>
+          <div class="acc-title">Questions Before the Meeting</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <div id="entries-cms-q" class="entries-list"></div>
+          <div class="new-entry-wrap">
+            <div class="new-entry-label">New Entry</div>
+            <textarea class="new-entry-area" id="new-cms-q"
+              placeholder="Type a question to prepare before the meeting…"></textarea>
+            <div class="new-entry-footer">
+              <button class="submit-btn" onclick="submitEntry('cms-q', 'new-cms-q')">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="acc-item">
+        <div class="acc-header" onclick="toggle(this)">
+          <div class="acc-num editable">8</div>
+          <div class="acc-title">Meeting Notes</div>
+          <span class="acc-arrow">▲</span>
+        </div>
+        <div class="acc-body">
+          <div id="entries-cms-n" class="entries-list"></div>
+          <div class="new-entry-wrap">
+            <div class="new-entry-label">New Entry</div>
+            <textarea class="new-entry-area" id="new-cms-n"
+              placeholder="Type your meeting notes here…"></textarea>
+            <div class="new-entry-footer">
+              <button class="submit-btn" onclick="submitEntry('cms-n', 'new-cms-n')">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /accordion -->
+  </div><!-- /cms -->
+
+</div><!-- /page -->
+
+<script>
+// ── SUPABASE CONFIG ───────────────────────────────────────────────────────────
+const SB_URL = 'https://mzimzktpzrztrfermpik.supabase.co';
+const SB_KEY = 'sb_publishable_NQbs7aIW0Oo0KRcmzVHodQ_1rwafvPf';
+const SB_H   = {
+  'apikey': SB_KEY,
+  'Authorization': 'Bearer ' + SB_KEY,
+  'Content-Type': 'application/json'
+};
+
+// key like 'humanwell-q' → { companyKey:'humanwell', section:'questions' }
+function parseKey(key) {
+  const i = key.lastIndexOf('-');
+  return {
+    companyKey: key.substring(0, i),
+    section: key.substring(i + 1) === 'q' ? 'questions' : 'notes'
+  };
+}
+
+async function dbLoad(key) {
+  const { companyKey, section } = parseKey(key);
+  try {
+    const r = await fetch(
+      `${SB_URL}/rest/v1/notes?company_key=eq.${companyKey}&section=eq.${section}&select=entries`,
+      { headers: SB_H }
+    );
+    const rows = await r.json();
+    return rows.length && rows[0].entries ? rows[0].entries : [];
+  } catch { return []; }
+}
+
+async function dbSave(key, entries) {
+  const { companyKey, section } = parseKey(key);
+  await fetch(`${SB_URL}/rest/v1/notes`, {
+    method: 'POST',
+    headers: { ...SB_H, 'Prefer': 'resolution=merge-duplicates,return=minimal' },
+    body: JSON.stringify({
+      company_key: companyKey,
+      section,
+      entries,
+      updated_at: new Date().toISOString()
+    })
+  });
+}
+
+// ── SCROLL + HIGHLIGHT ────────────────────────────────────────────────────────
+function goTo(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  el.classList.remove('highlight');
+  void el.offsetWidth;
+  el.classList.add('highlight');
+  el.addEventListener('animationend', () => el.classList.remove('highlight'), { once: true });
+}
+
+// ── ACCORDION ────────────────────────────────────────────────────────────────
+function toggle(header) {
+  const body  = header.nextElementSibling;
+  const arrow = header.querySelector('.acc-arrow');
+  const open  = body.classList.contains('open');
+  body.classList.toggle('open', !open);
+  arrow.classList.toggle('open', !open);
+}
+
+// ── RENDER ENTRIES (async, loads from Supabase) ───────────────────────────────
+async function renderEntries(key) {
+  const container = document.getElementById('entries-' + key);
+  if (!container) return;
+  container.innerHTML = '<p style="color:var(--muted);font-size:0.8rem;padding:4px 0;font-style:italic;">Loading…</p>';
+  const entries = await dbLoad(key);
+  container.innerHTML = '';
+  entries.forEach((entry, idx) => {
+    const card = document.createElement('div');
+    card.className = 'entry-card';
+    card.id = 'entry-' + key + '-' + idx;
+    card.innerHTML = `
+      <div class="entry-card-top">
+        <span class="entry-ts">${entry.timestamp}</span>
+        <div style="display:flex;gap:6px">
+          <button class="edit-btn"   onclick="startEdit('${key}', ${idx})">Edit</button>
+          <button class="delete-btn" onclick="deleteEntry('${key}', ${idx})">Delete</button>
+        </div>
+      </div>
+      <div class="entry-text">${escHtml(entry.text)}</div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+// ── SUBMIT NEW ENTRY ──────────────────────────────────────────────────────────
+async function submitEntry(key, taId) {
+  const ta = document.getElementById(taId);
+  if (!ta || !ta.value.trim()) return;
+  const btn = ta.closest('.new-entry-wrap').querySelector('.submit-btn');
+  btn.textContent = 'Saving…'; btn.disabled = true;
+  const entries = await dbLoad(key);
+  entries.push({ text: ta.value.trim(), timestamp: new Date().toLocaleString() });
+  await dbSave(key, entries);
+  ta.value = '';
+  btn.textContent = 'Submit'; btn.disabled = false;
+  await renderEntries(key);
+}
+
+// ── EDIT EXISTING ENTRY ───────────────────────────────────────────────────────
+async function startEdit(key, idx) {
+  const card    = document.getElementById('entry-' + key + '-' + idx);
+  const entries = await dbLoad(key);
+  const entry   = entries[idx];
+  if (!card || !entry) return;
+  card.innerHTML = `
+    <div class="entry-card-top">
+      <span class="entry-ts">Editing — ${entry.timestamp}</span>
+    </div>
+    <div class="entry-edit-wrap">
+      <textarea class="entry-textarea" id="edit-ta-${key}-${idx}">${escHtml(entry.text)}</textarea>
+      <div class="entry-edit-btns">
+        <button class="btn-cancel-edit" onclick="renderEntries('${key}')">Cancel</button>
+        <button class="btn-save-edit"   onclick="saveEdit('${key}', ${idx})">Save</button>
+      </div>
+    </div>
+  `;
+}
+
+async function saveEdit(key, idx) {
+  const ta = document.getElementById('edit-ta-' + key + '-' + idx);
+  if (!ta) return;
+  const btn = ta.closest('.entry-edit-btns').querySelector('.btn-save-edit');
+  btn.textContent = 'Saving…'; btn.disabled = true;
+  const entries = await dbLoad(key);
+  entries[idx].text = ta.value.trim();
+  entries[idx].timestamp = entries[idx].timestamp + ' (edited ' + new Date().toLocaleString() + ')';
+  await dbSave(key, entries);
+  await renderEntries(key);
+}
+
+// ── DELETE ENTRY ──────────────────────────────────────────────────────────────
+async function deleteEntry(key, idx) {
+  if (!confirm('Delete this entry?')) return;
+  const entries = await dbLoad(key);
+  entries.splice(idx, 1);
+  await dbSave(key, entries);
+  await renderEntries(key);
+}
+
+// ── HELPERS ───────────────────────────────────────────────────────────────────
+function escHtml(str) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/\n/g, '<br>');
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  ['humanwell-q','humanwell-n','cms-q','cms-n'].forEach(renderEntries);
+});
+</script>
+</body>
+</html>
